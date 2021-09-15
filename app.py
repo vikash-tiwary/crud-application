@@ -22,6 +22,10 @@ db = SQLAlchemy(app)
 
 
 class Employe(db.Model):
+    """
+    Employee Model for employee database 
+    first anme,last name and email is the field od employee table
+    """
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80),  nullable=False)
@@ -33,6 +37,11 @@ class Employe(db.Model):
 
 @app.route('/', methods=["GET", "POST"])
 def index():
+    """
+    Given Employe Model 
+    Sending the the employee data into table
+    storing the data into database taking the data from employee form
+    """
     emps=None
     if request.form:
         try:
@@ -48,6 +57,9 @@ def index():
 
 @app.route("/edit/<int:id>",methods=["GET", "POST"])
 def update(id):
+    """
+    Update the employee table field
+    """
     if request.method=="POST":
         try:
             first_name = request.form.get("first_name")
@@ -68,6 +80,9 @@ def update(id):
 
 @app.route("/delete/<int:id>",methods=["GET", "POST"])
 def delete(id):
+    """
+    Delete the employe id
+    """
     emp=Employe.query.filter_by(id=id).first()
     db.session.delete(emp)
     db.session.commit()
