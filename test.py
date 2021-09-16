@@ -26,7 +26,7 @@ def test_employee():
 #Post the data
 def test_index():
     """
-    Test case for uploading the data into database
+    Test case for get and post the data
     """
     data = {
         "id": "1", 
@@ -36,8 +36,10 @@ def test_index():
     }
 
     response = requests.post("http://127.0.0.1:5000/", json=json.dumps(data))
+    get_response=requests.get("http://127.0.0.1:5000/")
     
     assert 200== response.status_code
+    assert 200==get_response.status_code
 
 
 #update data    
@@ -52,7 +54,7 @@ def test_update():
     
     assert 200== response.status_code
 
-#delete data
+#delete
 def test_delete():
     """
     Test cases to delete employee from table
